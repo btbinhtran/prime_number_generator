@@ -42,4 +42,52 @@ describe PrimeNumberGenerator do
       expect(@prime_num_gen.is_prime? 3).to be true
     end
   end
+
+  context "generate" do
+    it "should raise a NonIntPositiveException when the starting value is not positive" do
+      expect {
+        @prime_num_gen.generate(-1, 1)
+      }.to raise_error(NonIntPositiveException)
+    end
+
+    it "should raise a NonIntPositiveException when the starting value is a decimal" do
+      expect {
+        @prime_num_gen.generate(1.1, 2)
+      }.to raise_error(NonIntPositiveException)
+    end
+
+    it "should raise a NonIntPositiveException when the starting value is a string" do
+      expect {
+        @prime_num_gen.generate("1", 2)
+      }.to raise_error(NonIntPositiveException)
+    end
+
+    it "should raise a NonIntPositiveException when the ending value is not positive" do
+      expect {
+        @prime_num_gen.generate(1, -1)
+      }.to raise_error(NonIntPositiveException)
+    end
+
+    it "should raise a NonIntPositiveException when the ending value is a decimal" do
+      expect {
+        @prime_num_gen.generate(1, 2.2)
+      }.to raise_error(NonIntPositiveException)
+    end
+
+    it "should raise a NonIntPositiveException when the ending value is a string" do
+      expect {
+        @prime_num_gen.generate(1, "2")
+      }.to raise_error(NonIntPositiveException)
+    end
+
+    it "should return a list of prime numbers that is inclusive of starting value and ending value" do
+      expect(@prime_num_gen.generate(2, 3)).to eq [2, 3]
+    end
+
+    it "should return a list of prime numbers that is the same when starting value is swapped with ending value" do
+      expect(@prime_num_gen.generate(2, 4)).to eq [2, 3]
+
+      expect(@prime_num_gen.generate(4, 2)).to eq [2, 3]
+    end
+  end
 end

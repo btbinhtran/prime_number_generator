@@ -12,5 +12,31 @@ class PrimeNumberGenerator
 
   # returns a list of prime numbers
   def generate(starting_value, ending_value)
+    unless self.is_positive_int?(starting_value) and self.is_positive_int?(ending_value)
+      raise NonIntPositiveException.new
+    end
+
+    if starting_value > ending_value
+      temp = starting_value
+      starting_value = ending_value
+      ending_value = temp
+    end
+
+    prime_nums = []
+
+    starting_value.upto(ending_value) do |number|
+      if self.is_prime?(number)
+        prime_nums << number
+      end
+    end
+
+    prime_nums
+  end
+end
+
+class NonIntPositiveException < StandardError
+  def initialize()
+    @exception_type = "custom"
+    super("The parameters you passed have to be positive integers!")
   end
 end
