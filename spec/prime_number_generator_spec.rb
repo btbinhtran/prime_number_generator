@@ -89,5 +89,9 @@ describe PrimeNumberGenerator do
 
       expect(@prime_num_gen.generate(4, 2)).to eq [2, 3]
     end
+
+    it "should return the correct list from the range 7900 and 7920" do
+      expect(@prime_num_gen.generate(7900, 7920)).to eq [7901, 7907, 7919]
+    end
   end
 end
