@@ -6,6 +6,10 @@ describe PrimeNumberGenerator do
     @prime_num_gen = PrimeNumberGenerator.new
   end
 
+  # PNG-SRS-3
+  # PNG-SRS-4
+  # PNG-SRS-5
+  # PNG-SRS-6
   context "is_positive_int?" do
     it "should return false when param is a boolean" do
       expect(@prime_num_gen.is_positive_int? true).to be false
@@ -29,6 +33,7 @@ describe PrimeNumberGenerator do
   end
 
   # param is assumed to be of type integer
+  # PNG-SRS-1
   context "is_prime?" do
     it "should return false when param is negative" do
       expect(@prime_num_gen.is_prime? -1).to be false
@@ -48,68 +53,80 @@ describe PrimeNumberGenerator do
   end
 
   context "generate" do
+    # PNG-SRS-4
     it "should raise a NonIntPositiveException when the starting value is not positive" do
       expect {
         @prime_num_gen.generate(-1, 1)
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-3
     it "should raise a NonIntPositiveException when the starting value is a boolean" do
       expect {
         @prime_num_gen.generate(true, 2)
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-3
     it "should raise a NonIntPositiveException when the starting value is a decimal" do
       expect {
         @prime_num_gen.generate(1.1, 2)
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-3
     it "should raise a NonIntPositiveException when the starting value is a string" do
       expect {
         @prime_num_gen.generate("1", 2)
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-6
     it "should raise a NonIntPositiveException when the ending value is not positive" do
       expect {
         @prime_num_gen.generate(1, -1)
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-5
     it "should raise a NonIntPositiveException when the ending value is a boolean" do
       expect {
         @prime_num_gen.generate(1, true)
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-5
     it "should raise a NonIntPositiveException when the ending value is a decimal" do
       expect {
         @prime_num_gen.generate(1, 2.2)
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-5
     it "should raise a NonIntPositiveException when the ending value is a string" do
       expect {
         @prime_num_gen.generate(1, "2")
       }.to raise_error(NonIntPositiveException)
     end
 
+    # PNG-SRS-2
     it "should return a list of prime numbers that is inclusive of starting value and ending value" do
       expect(@prime_num_gen.generate(2, 3)).to eq [2, 3]
     end
 
+    # PNG-SRS-8
     it "should return a list of prime numbers that is the same when starting value is swapped with ending value" do
       expect(@prime_num_gen.generate(2, 4)).to eq [2, 3]
 
       expect(@prime_num_gen.generate(4, 2)).to eq [2, 3]
     end
 
+    # PNG-SRS-9
     it "should return the correct list from the range 7900 and 7920" do
       expect(@prime_num_gen.generate(7900, 7920)).to eq [7901, 7907, 7919]
     end
 
+    # PNG-SRS-7
     it "should run under 1 second for a range that is within 1000000 numbers" do
       start_time = Time.new
       @prime_num_gen.generate(1, 1000001)

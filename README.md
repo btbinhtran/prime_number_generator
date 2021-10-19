@@ -10,6 +10,8 @@
 * PNG-SRS-5: The software shall display an error when trying to generate a list of prime numbers with a non-integer ending value.
 * PNG-SRS-6: The software shall display an error when trying to generate a list of prime numbers with a non-positive ending value.
 * PNG-SRS-7: The software shall be able to generate a list of prime numbers from a range of 1000000 numbers within 1 second.
+* PNG-SRS-8: The software shall generate the same list of prime numbers when the starting value and ending value are interchanged.
+* PNG-SRS-9: The software shall generate the list of prime numbers [7901, 7907, 7919] from the starting value 7900 and ending value 7920.
 
 
 # Installation:
