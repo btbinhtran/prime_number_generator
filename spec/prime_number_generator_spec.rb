@@ -7,6 +7,10 @@ describe PrimeNumberGenerator do
   end
 
   context "is_positive_int?" do
+    it "should return false when param is a boolean" do
+      expect(@prime_num_gen.is_positive_int? true).to be false
+    end
+
     it "should return false when param is a decimal" do
       expect(@prime_num_gen.is_positive_int? 3.0).to be false
     end
@@ -50,6 +54,12 @@ describe PrimeNumberGenerator do
       }.to raise_error(NonIntPositiveException)
     end
 
+    it "should raise a NonIntPositiveException when the starting value is a boolean" do
+      expect {
+        @prime_num_gen.generate(true, 2)
+      }.to raise_error(NonIntPositiveException)
+    end
+
     it "should raise a NonIntPositiveException when the starting value is a decimal" do
       expect {
         @prime_num_gen.generate(1.1, 2)
@@ -65,6 +75,12 @@ describe PrimeNumberGenerator do
     it "should raise a NonIntPositiveException when the ending value is not positive" do
       expect {
         @prime_num_gen.generate(1, -1)
+      }.to raise_error(NonIntPositiveException)
+    end
+
+    it "should raise a NonIntPositiveException when the ending value is a boolean" do
+      expect {
+        @prime_num_gen.generate(1, true)
       }.to raise_error(NonIntPositiveException)
     end
 
@@ -92,6 +108,13 @@ describe PrimeNumberGenerator do
 
     it "should return the correct list from the range 7900 and 7920" do
       expect(@prime_num_gen.generate(7900, 7920)).to eq [7901, 7907, 7919]
+    end
+
+    it "should run under 1 second for a range that is within 1000000 numbers" do
+      start_time = Time.new
+      @prime_num_gen.generate(1, 1000001)
+      end_time = Time.new
+      expect(end_time - start_time).to be < 2
     end
   end
 end
