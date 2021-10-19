@@ -43,7 +43,7 @@ describe PrimeNumberGenerator do
       expect(@prime_num_gen.is_prime? 0).to be false
     end
 
-    it "should return false when param is a positive non prime integer" do
+    it "should return false when param is a positive composite integer" do
       expect(@prime_num_gen.is_prime? 10).to be false
     end
 
